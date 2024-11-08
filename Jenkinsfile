@@ -14,6 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "Compiling..."
+                    sh "java --version"
                     sh "mvn clean compile -DskipTests"
                 }
             }
