@@ -31,20 +31,16 @@ pipeline {
 
         stage("Code Quality check") {
             steps {
-                script {
+               steps{
+                script{
                     echo "Running SonarQube Scanner..."
                     withSonarQubeEnv() {
-                        sh """
-                        mvn clean verify sonar:sonar \
-                        -Dsonar.projectKey=TP2_DevOps \
-                        -Dsonar.projectName='TP2_DevOps' \
-                        -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.token="sqb_9ac5e760c1bfde49650ea15e69f723f3f8943896"
-                        """
+                        sh "mvn verify sonar:sonar -Dsonar.url=http://172.31.240.1:9000/ -Dsonar.login=squ_90bc1fef228bfdb69c5719a7298c2e1eb43dcf96 -Dsonar.projectKey=TP2_DevOps -Dsonar.projectName=TP2_DevOps"
                     }
                 }
             }
-        }
+            
+        }}
 
         stage('Snyk Security Test') {
             steps {
