@@ -34,7 +34,7 @@ pipeline {
                 script {
                     echo "Running SonarQube Scanner..."
                     withSonarQubeEnv() {
-                        sh "mvn verify sonar:sonar -Dsonar.url=http://localhost:9000/ -Dsonar.login=sqp_5d1cefc78fe33d32ac8610f5bedf8859ff91f4e2 -Dsonar.projectKey=TP2_DevOps -Dsonar.projectName=TP2_DevOps"
+                        sh "mvn verify sonar:sonar -Dsonar.url=http://172.31.240.1:9000/ -Dsonar.login=sqp_5d1cefc78fe33d32ac8610f5bedf8859ff91f4e2 -Dsonar.projectKey=TP2_DevOps -Dsonar.projectName=TP2_DevOps"
                     }
                 }
             }
