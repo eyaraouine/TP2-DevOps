@@ -31,32 +31,28 @@ pipeline {
 
         stage("Code Quality check") {
             steps {
-               steps{
-                script{
+                script {
                     echo "Running SonarQube Scanner..."
                     withSonarQubeEnv() {
                         sh "mvn verify sonar:sonar -Dsonar.url=http://172.31.240.1:9000/ -Dsonar.login=sqp_5d1cefc78fe33d32ac8610f5bedf8859ff91f4e2 -Dsonar.projectKey=TP2_DevOps -Dsonar.projectName=TP2_DevOps"
                     }
                 }
             }
-            
-        }}
+        }
 
         stage('Snyk Security Test') {
             steps {
-                echo 'Testing...'
                 script {
-                    // Give execute permissions to the mvnw file
+                    echo 'Testing for vulnerabilities...'
                     sh 'chmod +x ./mvnw'
-                    // Run the dependency tree command to verify maven wrapper works
                     sh './mvnw dependency:tree -DoutputType=dot --batch-mode --non-recursive --file="pom.xml"'
+                    snykSecurity(
+                        snykInstallation: 'snyk',
+                        snykTokenId: 'snyk_cred2',
+                        failOnIssues: false,
+                        failOnError: false
+                    )
                 }
-                snykSecurity(
-                    snykInstallation: 'snyk',
-                    snykTokenId: 'snyk_cred2',
-                    failOnIssues: false,
-                    failOnError: false
-                )
             }
         }
 
@@ -78,6 +74,4 @@ pipeline {
             }
         }
     }
-
-    
 }
