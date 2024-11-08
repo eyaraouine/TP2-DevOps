@@ -1,6 +1,6 @@
 services:
   jenkins-container:
-    image: tp2devops
+    image: ayouta/tp2_devops:latest
     container_name: "jenkins-container"
     ports:
       - "8090:8080"

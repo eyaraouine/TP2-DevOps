@@ -5,7 +5,7 @@ pipeline {
         maven "maven"
     }
      environment {
-            registry = "soumayaaloui/tp2_devops"
+            registry = "ayouta/tp2_devops"
             registryCredential = 'docker_hub'
             dockerImage = ''
      }
@@ -41,46 +41,15 @@ pipeline {
                 script{
                     echo "Running SonarQube Scanner..."
                     withSonarQubeEnv() {
-                        sh "mvn verify sonar:sonar -Dsonar.url=http://172.31.240.1:9000/ -Dsonar.login=squ_90bc1fef228bfdb69c5719a7298c2e1eb43dcf96 -Dsonar.projectKey=TP2_DevOps -Dsonar.projectName=TP2_DevOps"
+                        sh "mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=TP2_DevOps \
+  -Dsonar.projectName='TP2_DevOps' \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.token=sqp_40be48237bfb7cb8f6fe4084f0b5fa40353a3e56"
                     }
                 }
             }
         }
-        stage('Snyk Security Test') {
-            steps {
-                echo 'Testing...'
-                script {
-                    // Give execute permissions to the mvnw file
-                    sh 'chmod +x ./mvnw'
-                    // Run the dependency tree command to verify maven wrapper works
-                    sh './mvnw dependency:tree -DoutputType=dot --batch-mode --non-recursive --file="pom.xml"'
-                }
-                snykSecurity(
-                    snykInstallation: 'snyk',
-                    snykTokenId: 'snyk_cred2',
-                    failOnIssues: false,
-                    failOnError: false
-                )
-            }
-        }
-    stage('Building image') {
-            steps {
-                script {
-                    dockerImage = docker.build "${registry}:${BUILD_NUMBER}"
-                }
-            }
-        }
-
-        stage('Upload Image') {
-            steps {
-                script {
-                    docker.withRegistry('', registryCredential) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-    }
     post {
 
         always {

@@ -1,9 +1,3 @@
-FROM jenkins/jenkins:2.414.3-jdk11
-
-USER jenkins
-
-# Install Jenkins plugins
-RUN jenkins-plugin-cli --plugins "blueocean"
 
 # Build stage
 FROM maven:3.8.3-openjdk-17 AS build

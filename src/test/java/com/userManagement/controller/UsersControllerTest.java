@@ -33,19 +33,19 @@ class UsersControllerTest {
     @Test
     void fetchUserByUsernameEndpoint() throws Exception {
 
-        mockMvc.perform(get("/api/v1/fetchUserByUsername/paul_pop")
+        mockMvc.perform(get("/api/v1/fetchUserByUsername/ayouta")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("statusCode" , is(200)))
-                .andExpect(jsonPath("message.firstName", is("paulous")));
-        assert(usersRepository.findByUsername("kaySlow").isPresent());
+                .andExpect(jsonPath("message.firstName", is("eya")));
+        assert(usersRepository.findByUsername("hamouda").isPresent());
     }
 
     @Test
     void addUserEndpoint() throws Exception {
-        UsersDto usersDto =new UsersDto("bidMore","Bid","More","admin");
+        UsersDto usersDto =new UsersDto("joseph","youssef","ouaz", "admin");
         ObjectMapper mapper = new ObjectMapper();
         mockMvc.perform(post("/api/v1/addUser")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -97,18 +97,9 @@ class UsersControllerTest {
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("statusCode" , is(200)))
-                .andExpect(jsonPath("message.[0].username", is("paul_pop")));
+                .andExpect(jsonPath("message.[0].username", is("hamouda")));
 
 
     }
-
-
-
-
-
-
-
-
-
 
 }

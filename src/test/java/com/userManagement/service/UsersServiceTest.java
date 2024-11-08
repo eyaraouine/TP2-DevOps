@@ -37,7 +37,7 @@ class UsersServiceTest {
     void fetchAllUsers() {
         List<UsersEntity> usersEntityList = usersService.fetchAllUsers();
         assertEquals(usersEntityList.size(), 4);
-        assertEquals(usersEntityList.get(0).getFirstName(), "paulous");
+        assertEquals(usersEntityList.get(0).getFirstName(), "youcef");
     }
     @Test
     void addNewUser_SuccessfulAddition() {
