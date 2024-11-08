@@ -29,15 +29,63 @@ pipeline {
             }
         }
 
-        stage("Test") {
+        stage("Code Quality check") {
             steps {
                 script {
-                    echo "Test ..."
-                    sh "mvn test -X"
+                    echo "Running SonarQube Scanner..."
+                    withSonarQubeEnv() {
+                        sh """
+                        mvn clean verify sonar:sonar \
+                        -Dsonar.projectKey=TP2_DevOps \
+                        -Dsonar.projectName='TP2_DevOps' \
+                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.token="sqp_40be48237bfb7cb8f6fe4084f0b5fa40353a3e56"
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Snyk Security Test') {
+            steps {
+                echo 'Testing...'
+                script {
+                    // Give execute permissions to the mvnw file
+                    sh 'chmod +x ./mvnw'
+                    // Run the dependency tree command to verify maven wrapper works
+                    sh './mvnw dependency:tree -DoutputType=dot --batch-mode --non-recursive --file="pom.xml"'
+                }
+                snykSecurity(
+                    snykInstallation: 'snyk',
+                    snykTokenId: 'snyk_cred2',
+                    failOnIssues: false,
+                    failOnError: false
+                )
+            }
+        }
+
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
+                }
+            }
+        }
+
+        stage('Upload Image') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
                 }
             }
         }
     }
 
+    post {
+        always {
+            junit "target/surefire-reports/*.xml"
+        }
+    }
 }
-   
