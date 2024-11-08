@@ -9,4 +9,4 @@ CREATE TABLE `users_table` (
   `updatedAt` date DEFAULT current_timestamp(),
   PRIMARY KEY (`usersId`),
   UNIQUE KEY `users_table_un` (`username`)
-);
+) ENGINE=MyISAM;
