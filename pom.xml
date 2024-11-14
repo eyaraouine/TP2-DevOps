@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-core</artifactId>
-			<version>9.0.90</version> <!-- Updated to resolve DoS vulnerability -->
+			<version>9.0.96</version> <!-- Updated to resolve DoS vulnerability -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
