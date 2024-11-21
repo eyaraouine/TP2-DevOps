@@ -55,18 +55,18 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>5.3.33</version> <!-- Updated to resolve Open Redirect vulnerability -->
+			<version>6.1.14</version> <!-- Updated to resolve Open Redirect vulnerability -->
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-core</artifactId>
-			<version>9.0.90</version> <!-- Updated to resolve DoS vulnerability -->
+			<version>9.0.96</version> <!-- Updated to resolve DoS vulnerability -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-websocket</artifactId>
-			<version>9.0.86</version> <!-- Updated to resolve DoS vulnerability -->
+			<version>9.0.96</version> <!-- Updated to resolve DoS vulnerability -->
 		</dependency>
 		<dependency>
 			<groupId>org.jacoco</groupId>
