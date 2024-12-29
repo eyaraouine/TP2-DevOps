@@ -61,12 +61,12 @@
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-core</artifactId>
-			<version>9.0.90</version> <!-- Updated to resolve DoS vulnerability -->
+			<version>9.0.98</version> <!-- Updated to resolve DoS vulnerability -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-websocket</artifactId>
-			<version>9.0.86</version> <!-- Updated to resolve DoS vulnerability -->
+			<version>9.0.98</version> <!-- Updated to resolve DoS vulnerability -->
 		</dependency>
 		<dependency>
 			<groupId>org.jacoco</groupId>
