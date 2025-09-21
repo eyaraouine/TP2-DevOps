@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>5.3.33</version> <!-- Updated to resolve Open Redirect vulnerability -->
+			<version>6.2.11</version> <!-- Updated to resolve Open Redirect vulnerability -->
 		</dependency>
 
 		<dependency>
